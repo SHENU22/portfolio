@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veluwanaramaya | Web Developer & Digital Artisan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'temple-gold': '#C9A227',
+                        'temple-gold-light': '#E6D5A8',
+                        'temple-cream': '#F8F5E9',
+                        'temple-cream-dark': '#F0EBD8',
+                        'temple-brown': '#3E2723',
+                        'temple-brown-light': '#5D4037',
+                        'temple-leaf': '#8F9779',
+                        'temple-stone': '#D7CCC8',
+                    },
+                    fontFamily: {
+                        'serif': ['Cormorant Garamond', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Sacred Geometry Background Animation */
+        .mandala-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .mandala-ring {
+            position: absolute;
+            border: 1px solid #C9A227;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .mandala-ring:nth-child(1) { width: 100%; height: 100%; animation: spin 30s linear infinite; }
+        .mandala-ring:nth-child(2) { width: 80%; height: 80%; animation: spin 25s linear infinite reverse; }
+        .mandala-ring:nth-child(3) { width: 60%; height: 60%; animation: spin 20s linear infinite; }
+        .mandala-ring:nth-child(4) { width: 40%; height: 40%; animation: spin 15s linear infinite reverse; }
+
+        .sacred-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #C9A227;
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(201, 162, 39, 0.5);
+        }
+
+        @keyframes spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Lotus Pattern SVG Background */
+        .lotus-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10 C35 20, 40 25, 30 40 C20 25, 25 20, 30 10' fill='none' stroke='%23C9A227' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8F5E9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C9A227;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3E2723;
+        }
+
+        /* Stone Block Effect for Projects */
+        .stone-block {
+            background: linear-gradient(135deg, #F0EBD8 0%, #E6D5A8 100%);
+            box-shadow: 
+                0 4px 6px -1px rgba(62, 39, 35, 0.1),
+                0 2px 4px -1px rgba(62, 39, 35, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .stone-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 25px -5px rgba(62, 39, 35, 0.1),
+                0 10px 10px -5px rgba(62, 39, 35, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* Text Selection Color */
+        ::selection {
+            background: rgba(201, 162, 39, 0.3);
+            color: #3E2723;
+        }
+
+        /* Intersection Observer Animation Classes */
+        .observe-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .observe-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Temple Roof Silhouette */
+        .temple-roof {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            background: linear-gradient(to bottom, #3E2723, #5D4037);
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-temple-cream text-temple-brown font-sans antialiased lotus-bg">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-temple-cream/90 backdrop-blur-md border-b border-temple-gold/20 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="font-serif text-2xl text-temple-brown hover:text-temple-gold transition-colors duration-300">
+                    Veluwana<span class="text-temple-gold">rāmaya</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-sm tracking-widest uppercase hover:text-temple-gold transition-colors duration-300">About</a>
+                    <a href="#skills" class="text-sm tracking-widest uppercase hover:text-temple-gold transition-colors duration-300">Skills</a>
+                    <a href="#projects" class="text-sm tracking-widest uppercase hover:text-temple-gold transition-colors duration-300">Projects</a>
+                    <a href="#contact" class="px-6 py-2 border border-temple-gold text-temple-gold hover:bg-temple-gold hover:text-temple-cream transition-all duration-300 rounded-full text-sm tracking-wider">
+                        Contact
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-temple-brown" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-temple-cream border-t border-temple-gold/20">
+            <div class="px-6 py-4 space-y-4 text-center">
+                <a href="#about" class="block text-sm tracking-widest uppercase hover:text-temple-gold">About</a>
+                <a href="#skills" class="block text-sm tracking-widest uppercase hover:text-temple-gold">Skills</a>
+                <a href="#projects" class="block text-sm tracking-widest uppercase hover:text-temple-gold">Projects</a>
+                <a href="#contact" class="block text-sm tracking-widest uppercase text-temple-gold">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Mandala Background -->
+        <div class="mandala-container hidden md:block">
+            <div class="mandala-ring"><div class="sacred-dot"></div></div>
+            <div class="mandala-ring"><div class="sacred-dot"></div></div>
+            <div class="mandala-ring"><div class="sacred-dot"></div></div>
+            <div class="mandala-ring"><div class="sacred-dot"></div></div>
+        </div>
+
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-temple-cream/0 via-temple-cream/50 to-temple-cream pointer-events-none"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <div class="mb-6 inline-block">
+                <svg class="w-16 h-16 mx-auto text-temple-gold opacity-80 animate-float" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <path d="M12 2C12 2 8 6 8 10C8 13 10 15 12 15C14 15 16 13 16 10C16 6 12 2 12 2Z"/>
+                    <path d="M12 15C7 15 3 18 3 22H21C21 18 17 15 12 15Z" opacity="0.5"/>
+                    <path d="M12 15V22"/>
+                    <path d="M8 10C6 8 4 8 2 10"/>
+                    <path d="M16 10C18 8 20 8 22 10"/>
+                </svg>
+            </div>
+            
+            <h1 class="font-serif text-5xl md:text-7xl text-temple-brown mb-4 tracking-tight observe-fade">
+                Veluwana<span class="text-temple-gold italic">rāmaya</span>
+            </h1>
+            
+            <div class="h-px w-24 bg-temple-gold mx-auto mb-6 observe-fade" style="transition-delay: 100ms;"></div>
+            
+            <p class="text-xl md:text-2xl text-temple-brown-light font-light mb-2 observe-fade" style="transition-delay: 200ms;">
+                International Buddhist Center
+            </p>
+            
+            <p class="text-lg md:text-xl text-temple-brown/70 font-light mb-12 tracking-wide observe-fade" style="transition-delay: 300ms;">
+                Web Developer | Creating Digital Spaces with Mindfulness
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center observe-fade" style="transition-delay: 400ms;">
+                <a href="#projects" class="px-8 py-3 bg-temple-brown text-temple-cream rounded-full hover:bg-temple-gold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    View My Work
+                </a>
+                <a href="#contact" class="px-8 py-3 border-2 border-temple-brown text-temple-brown rounded-full hover:bg-temple-brown hover:text-temple-cream transition-all duration-300">
+                    Contact
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-temple-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="py-20 bg-temple-brown text-temple-cream relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(201,162,39,.1) 35px, rgba(201,162,39,.1) 70px);"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <svg class="w-12 h-12 mx-auto mb-6 text-temple-gold opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <blockquote class="font-serif text-2xl md:text-4xl italic leading-relaxed mb-6 observe-fade">
+                "Peace comes from within. <br><span class="text-temple-gold">So does good design.</span>"
+            </blockquote>
+            <div class="h-px w-16 bg-temple-gold mx-auto"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="observe-fade">
+                    <div class="relative">
+                        <!-- Decorative Frame -->
+                        <div class="absolute -inset-4 border border-temple-gold/30 rounded-lg transform rotate-3"></div>
+                        <div class="absolute -inset-4 border border-temple-gold/30 rounded-lg transform -rotate-3"></div>
+                        
+                        <!-- Content -->
+                        <div class="relative bg-temple-cream-dark p-8 rounded-lg border border-temple-gold/20">
+                            <div class="w-24 h-24 bg-temple-brown rounded-full mx-auto mb-6 flex items-center justify-center">
+                                <svg class="w-12 h-12 text-temple-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-serif text-2xl text-center text-temple-brown mb-4">The Middle Path</h3>
+                            <p class="text-temple-brown-light text-center leading-relaxed">
+                                Between complexity and simplicity lies clarity. Between tradition and innovation lies wisdom.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="observe-fade">
+                    <h2 class="font-serif text-4xl md:text-5xl text-temple-brown mb-6">Mindful Development</h2>
+                    <div class="h-1 w-20 bg-temple-gold mb-8"></div>
+                    
+                    <p class="text-lg text-temple-brown-light leading-relaxed mb-6">
+                        Inspired by the discipline and mindfulness of Buddhist philosophy, I build clean, purposeful, and user-friendly web experiences. Just as meditation requires focus and intention, every line of code is written with clarity and purpose.
+                    </p>
+                    
+                    <p class="text-lg text-temple-brown-light leading-relaxed mb-8">
+                        My approach combines the ancient wisdom of balance and harmony with modern technical precision. I believe that digital spaces should not only function flawlessly but also bring a sense of calm and clarity to their users.
+                    </p>
+                    
+                    <div class="flex items-center space-x-4 text-temple-gold">
+                        <span class="w-12 h-px bg-temple-gold"></span>
+                        <span class="font-serif italic text-temple-brown">Balance in code, peace in design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-temple-cream-dark/30 relative">
+        <!-- Subtle Pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#3E2723 1px, transparent 1px); background-size: 30px 30px;"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 observe-fade">
+                <h2 class="font-serif text-4xl md:text-5xl text-temple-brown mb-4">Sacred Skills</h2>
+                <p class="text-temple-brown-light max-w-2xl mx-auto">Technologies wielded with intention and mastery</p>
+                <div class="h-px w-24 bg-temple-gold mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Skill Card 1 -->
+                <div class="bg-temple-cream p-8 rounded-lg border border-temple-gold/20 hover:border-temple-gold/50 transition-all duration-300 hover:shadow-xl group observe-fade">
+                    <div class="w-14 h-14 bg-temple-brown rounded-lg flex items-center justify-center mb-6 group-hover:bg-temple-gold transition-colors duration-300">
+                        <svg class="w-8 h-8 text-temple-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-temple-brown mb-3">Frontend</h3>
+                    <p class="text-temple-brown-light text-sm leading-relaxed mb-4">HTML5, CSS3, JavaScript (ES6+), React, Vue.js</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-temple-gold/10 text-temple-brown text-xs rounded-full">Semantic</span>
+                        <span class="px-3 py-1 bg-temple-gold/10 text-temple-brown text-xs rounded-full">Responsive</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="bg-temple-cream p-8 rounded-lg border border-temple-gold/20 hover:border-temple-gold/50 transition-all duration-300 hover:shadow-xl group observe-fade" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-temple-brown rounded-lg flex items-center justify-center mb-6 group-hover:bg-temple-gold transition-colors duration-300">
+                        <svg class="w-8 h-8 text-temple-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 01-2 2v4a2 2 0 012 2h14a2 2 0 012-2v-4a2 2 0 01-2-2m-2-4h.01M17 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-temple-brown mb-3">Backend</h3>
+                    <p class="text-temple-brown-light text-sm leading-relaxed mb-4">PHP, MySQL, Node.js, RESTful APIs</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-temple-gold/10 text-temple-brown text-xs rounded-full">Secure</span>
+                        <span class="px-3 py-1 bg-temple-gold/10 text-temple-brown text-xs rounded-full">Scalable</span>
+                    </div>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="bg-temple-cream p-8 rounded-lg border border-temple-gold/20 hover:border-temple-gold/50 transition-all duration-300 hover:shadow-xl group observe-fade" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-temple-brown rounded-lg flex items-center justify-center mb-6 group-hover:bg-temple-gold transition-colors duration-300">
+                        <svg class="w-8 h-8 text-temple-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-temple-brown mb-3">UI/UX Design</h3>
+                    <p class="text-temple-brown-light text-sm leading-relaxed mb-4">Figma, Adobe XD, User Research, Prototyping</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-temple-gold/10 text-temple-brown text-xs rounded-full">Intuitive</span>
+                        <span class="px-3 py-1 bg-temple-gold/10 text-temple-brown text-xs rounded-full">Accessible</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 md:py-32">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 observe-fade">
+                <h2 class="font-serif text-4xl md:text-5xl text-temple-brown mb-4">Digital Temples</h2>
+                <p class="text-temple-brown-light max-w-2xl mx-auto">Projects crafted with the precision of stone masonry</p>
+                <div class="h-px w-24 bg-temple-gold mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="stone-block rounded-lg p-8 observe-fade group cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-temple-brown to-temple-brown-light rounded-md mb-6 flex items-center justify-center overflow-hidden relative">
+                        <div class="absolute inset-0 bg-temple-gold/10 group-hover:bg-temple-gold/20 transition-colors duration-500"></div>
+                        <svg class="w-16 h-16 text-temple-cream relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-temple-brown mb-2">Monastery Management System</h3>
+                    <p class="text-temple-brown-light mb-4">A comprehensive web application for managing resident monks, schedules, and donations with mindful UX.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">PHP</span>
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">MySQL</span>
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">JavaScript</span>
+                    </div>
+                    <a href="#" class="text-temple-brown hover:text-temple-gold transition-colors text-sm font-medium flex items-center gap-2">
+                        View Project <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="stone-block rounded-lg p-8 observe-fade group cursor-pointer" style="transition-delay: 100ms;">
+                    <div class="h-48 bg-gradient-to-br from-temple-leaf to-temple-brown-light rounded-md mb-6 flex items-center justify-center overflow-hidden relative">
+                        <div class="absolute inset-0 bg-temple-gold/10 group-hover:bg-temple-gold/20 transition-colors duration-500"></div>
+                        <svg class="w-16 h-16 text-temple-cream relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-temple-brown mb-2">Dharma E-Library</h3>
+                    <p class="text-temple-brown-light mb-4">Digital archive of Buddhist texts with advanced search, bookmarking, and reading progress tracking.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">React</span>
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">Node.js</span>
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">MongoDB</span>
+                    </div>
+                    <a href="#" class="text-temple-brown hover:text-temple-gold transition-colors text-sm font-medium flex items-center gap-2">
+                        View Project <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="stone-block rounded-lg p-8 observe-fade group cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-temple-gold to-temple-brown rounded-md mb-6 flex items-center justify-center overflow-hidden relative">
+                        <div class="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-colors duration-500"></div>
+                        <svg class="w-16 h-16 text-temple-cream relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-temple-brown mb-2">Meditation Timer App</h3>
+                    <p class="text-temple-brown-light mb-4">Progressive web app with customizable bells, session tracking, and ambient sound integration.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">Vue.js</span>
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">PWA</span>
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">Web Audio API</span>
+                    </div>
+                    <a href="#" class="text-temple-brown hover:text-temple-gold transition-colors text-sm font-medium flex items-center gap-2">
+                        View Project <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="stone-block rounded-lg p-8 observe-fade group cursor-pointer" style="transition-delay: 100ms;">
+                    <div class="h-48 bg-gradient-to-br from-temple-brown-light to-temple-brown rounded-md mb-6 flex items-center justify-center overflow-hidden relative">
+                        <div class="absolute inset-0 bg-temple-gold/10 group-hover:bg-temple-gold/20 transition-colors duration-500"></div>
+                        <svg class="w-16 h-16 text-temple-cream relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 22V12h6v10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-temple-brown mb-2">Temple Website Redesign</h3>
+                    <p class="text-temple-brown-light mb-4">Complete rebranding and responsive redesign for historic temple, including donation portal integration.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">WordPress</span>
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">UI/UX</span>
+                        <span class="text-xs text-temple-gold border border-temple-gold/30 px-2 py-1 rounded">Figma</span>
+                    </div>
+                    <a href="#" class="text-temple-brown hover:text-temple-gold transition-colors text-sm font-medium flex items-center gap-2">
+                        View Project <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-temple-cream-dark/30 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16 observe-fade">
+                <h2 class="font-serif text-4xl md:text-5xl text-temple-brown mb-4">Begin the Conversation</h2>
+                <p class="text-temple-brown-light">Every journey begins with a single message</p>
+                <div class="h-px w-24 bg-temple-gold mx-auto mt-6"></div>
+            </div>
+
+            <div class="bg-temple-cream rounded-2xl shadow-xl p-8 md:p-12 border border-temple-gold/10 observe-fade">
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Message sent with mindfulness.');">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-temple-brown mb-2 tracking-wide">Name</label>
+                            <input type="text" class="w-full px-4 py-3 bg-temple-cream-dark/50 border border-temple-gold/20 rounded-lg focus:outline-none focus:border-temple-gold focus:ring-1 focus:ring-temple-gold transition-colors" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-temple-brown mb-2 tracking-wide">Email</label>
+                            <input type="email" class="w-full px-4 py-3 bg-temple-cream-dark/50 border border-temple-gold/20 rounded-lg focus:outline-none focus:border-temple-gold focus:ring-1 focus:ring-temple-gold transition-colors" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-temple-brown mb-2 tracking-wide">Message</label>
+                        <textarea rows="5" class="w-full px-4 py-3 bg-temple-cream-dark/50 border border-temple-gold/20 rounded-lg focus:outline-none focus:border-temple-gold focus:ring-1 focus:ring-temple-gold transition-colors resize-none" placeholder="Share your thoughts..."></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="px-12 py-4 bg-temple-brown text-temple-cream rounded-full hover:bg-temple-gold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-medium tracking-wide">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-12 pt-8 border-t border-temple-gold/20 flex flex-col md:flex-row justify-center items-center gap-8 text-temple-brown-light">
+                    <a href="mailto:hello@veluwana.com" class="flex items-center gap-2 hover:text-temple-gold transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        hello@veluwana.com
+                    </a>
+                    <span class="hidden md:block text-temple-gold/30">|</span>
+                    <div class="flex gap-6">
+                        <a href="#" class="hover:text-temple-gold transition-colors"><span class="sr-only">GitHub</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="#" class="hover:text-temple-gold transition-colors"><span class="sr-only">LinkedIn</span>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-temple-brown text-temple-cream-dark pt-16 pb-8 relative overflow-hidden">
+        <!-- Temple Roof Decoration -->
+        <div class="absolute top-0 left-0 w-full h-16 bg-temple-cream" style="clip-path: polygon(50% 100%, 0 0, 100% 0);"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 mt-8">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <div class="text-center md:text-left">
+                    <h3 class="font-serif text-2xl mb-4 text-temple-gold">Veluwanaramaya</h3>
+                    <p class="text-sm leading-relaxed opacity-80">
+                        Bridging ancient wisdom with modern technology. Creating digital experiences that inspire peace and clarity.
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full border border-temple-gold/30 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-temple-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-xs tracking-widest uppercase opacity-60">Peace • Code • Balance</p>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <h4 class="text-sm font-medium mb-4 text-temple-gold tracking-widest uppercase">Quick Links</h4>
+                    <nav class="space-y-2 text-sm">
+                        <a href="#about" class="block hover:text-temple-gold transition-colors">About</a>
+                        <a href="#skills" class="block hover:text-temple-gold transition-colors">Skills</a>
+                        <a href="#projects" class="block hover:text-temple-gold transition-colors">Projects</a>
+                        <a href="#contact" class="block hover:text-temple-gold transition-colors">Contact</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="border-t border-temple-gold/20 pt-8 text-center text-xs opacity-60">
+                <p>&copy; 2024 Veluwanaramaya International Buddhist Center. All rights reserved.</p>
+                <p class="mt-2 font-serif italic">"The mind is everything. What you think you become."</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with .observe-fade class
+        document.querySelectorAll('.observe-fade').forEach((el) => observer.observe(el));
+
+        // Navbar Scroll Effect
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
